@@ -15,7 +15,7 @@ As more companies provision licenses for AI tools, and as those tools become mor
 * [Claude Desktop](https://claude.com/download)
 * [Sysmon](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon)
 
-Ensure your Elastic Stack component versions match (I used 9.5.5 for this project).
+Ensure your Elastic Stack component versions match (I used version 9.5.5 for this project).
 
 ## Installing ELK
 Start by downloading the four ELK components above in any order. Then install as follows:
