@@ -1,4 +1,4 @@
-# Monitoring-AI-Agent-Activity-with-Elastic-Stack
+# Monitoring AI Agent Activity with Elastic Stack
 _Project in Progress_
 
 > [!NOTE]
@@ -8,13 +8,14 @@ _Project in Progress_
 As more companies provision licenses for AI tools, and as those tools become more autonomous, I believe it's prudent to learn how to closely monitor agentic activity within enterprise environments. This project is intended to demonstrate what key activity to look out for, and how to pipe this data into an analytics platform of your choice (in this case, Elastic Stack). We will be examining Sysmon activity attributed to the Claude Desktop executable, along with Claude's hook log repository for more granular activity information.
 
 ## Resources
-* [ElasticSearch](https://www.elastic.co/downloads/elasticsearch)
+* [Elasticsearch](https://www.elastic.co/downloads/elasticsearch)
 * [Kibana](https://www.elastic.co/downloads/kibana)
 * [Filebeat](https://www.elastic.co/downloads/beats/filebeat)
 * [Winlogbeat](https://www.elastic.co/downloads/beats/winlogbeat)
 * [Claude Desktop](https://claude.com/download)
+* [Sysmon](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon)
 
-Ensure your ELK component versions match (I used 9.5.5 for this project).
+Ensure your Elastic Stack component versions match (I used 9.5.5 for this project).
 
 ## Installing ELK
 Start by downloading the four ELK components above in any order. Then install as follows:
