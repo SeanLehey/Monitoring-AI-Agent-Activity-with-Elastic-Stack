@@ -129,8 +129,8 @@ Let's see what this looks like from a security analyst's point of view. Navigate
 ```
 Let's explore what these hook events mean. 
 
-`UserPromptSubmit` is what it says on the tin; it is a record of the user's prompt that initiated the agentic action.
+[`UserPromptSubmit`](https://code.claude.com/docs/en/hooks#userpromptsubmit) is what it says on the tin; it shows exactly what the user typed as their prompt.
 
-`PreToolUse`
+[`PreToolUse`](https://code.claude.com/docs/en/hooks#pretooluse)
 
-`PostToolUse`
+[`PostToolUse`](https://code.claude.com/docs/en/hooks#posttooluse)
