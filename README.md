@@ -69,9 +69,60 @@ Now we can start tracking some hooks! I've asked Claude Code to create a simple 
 
 <img width="1375" height="491" alt="image" src="https://github.com/user-attachments/assets/4dc513c4-0081-417b-868c-612300b0cc02" />
 
-Let's see what this looks like from a security analyst's point of view. Navigate to `%USERPROFILE%\.claude\hook-logs\agent-activity.jsonl` and take a look at each log entry that begins with `{"session_id":`. As we can see, there are three distinct hooks associated with our agentic action:
+Let's see what this looks like from a security analyst's point of view. Navigate to `%USERPROFILE%\.claude\hook-logs\agent-activity.jsonl` and take a look at each log entry that begins with `{"session_id":`. As we can see, there are three distinct hook events associated with our agentic action.
 
-```{"session_id":"550eb892-041a-4a66-910b-94e27ebb110d","transcript_path":"C:\\Users\\Windows01\\.claude\\projects\\C--Users-Windows01-AppData-Local-Claude-Data-claude-pzs8sxrjxfjjc-scratch-workspaces-1adf9bf3-ae5e-4b32-9e2d-4ad446d1c3b0-2f0d53a2-372c-4fda-ae5c-76c75b82d265-scratch-2026-10-28-69a692\\550eb892-041a-4a66-910b-94e27ebb110d.jsonl","cwd":"C:\\Users\\Windows01\\AppData\\Local\\Claude-Data\\claude_pzs8sxrjxfjjc\\scratch-workspaces\\1adf9bf3-ae5e-4b32-9e2d-4ad446d1c3b0\\2f0d53a2-372c-4fda-ae5c-76c75b82d265\\scratch-2026-10-28-69a692","scratchpad_dir":"C:\\Users\\WINDOW~1\\AppData\\Local\\Temp\\claude\\C--Users-Windows01-AppData-Local-Claude-Data-claude-pzs8sxrjxfjjc-scratch-workspaces-1adf9bf3-ae5e-4b32-9e2d-4ad446d1c3b0-2f0d53a2-372c-4fda-ae5c-76c75b82d265-scratch-2026-10-28-69a692\\550eb892-041a-4a66-910b-94e27ebb110d\\scratchpad","prompt_id":"1f2bcc10-d13f-451b-b624-94ac964ef446","permission_mode":"default","hook_event_name":"UserPromptSubmit","prompt":"Please create a .txt file on my Desktop called Hello_world, and type that famous sentence about the quick brown fox as its contents.","session_title":"Agentic Testbed","@timestamp":"2026-10-28T09:50:57.4881020Z"}
-{"session_id":"550eb892-041a-4a66-910b-94e27ebb110d","transcript_path":"C:\\Users\\Windows01\\.claude\\projects\\C--Users-Windows01-AppData-Local-Claude-Data-claude-pzs8sxrjxfjjc-scratch-workspaces-1adf9bf3-ae5e-4b32-9e2d-4ad446d1c3b0-2f0d53a2-372c-4fda-ae5c-76c75b82d265-scratch-2026-10-28-69a692\\550eb892-041a-4a66-910b-94e27ebb110d.jsonl","cwd":"C:\\Users\\Windows01\\AppData\\Local\\Claude-Data\\claude_pzs8sxrjxfjjc\\scratch-workspaces\\1adf9bf3-ae5e-4b32-9e2d-4ad446d1c3b0\\2f0d53a2-372c-4fda-ae5c-76c75b82d265\\scratch-2026-10-28-69a692","scratchpad_dir":"C:\\Users\\WINDOW~1\\AppData\\Local\\Temp\\claude\\C--Users-Windows01-AppData-Local-Claude-Data-claude-pzs8sxrjxfjjc-scratch-workspaces-1adf9bf3-ae5e-4b32-9e2d-4ad446d1c3b0-2f0d53a2-372c-4fda-ae5c-76c75b82d265-scratch-2026-10-28-69a692\\550eb892-041a-4a66-910b-94e27ebb110d\\scratchpad","prompt_id":"1f2bcc10-d13f-451b-b624-94ac964ef446","permission_mode":"default","effort":{"level":"medium"},"hook_event_name":"PreToolUse","tool_name":"Write","tool_input":{"file_path":"C:\\Users\\Windows01\\Desktop\\Hello_world.txt","content":"The quick brown fox jumps over the lazy dog.\n"},"tool_use_id":"toolu_01YQkZSb6yP3897aPtmDEv1C","@timestamp":"2026-10-28T09:50:59.6690393Z"}
-{"session_id":"550eb892-041a-4a66-910b-94e27ebb110d","transcript_path":"C:\\Users\\Windows01\\.claude\\projects\\C--Users-Windows01-AppData-Local-Claude-Data-claude-pzs8sxrjxfjjc-scratch-workspaces-1adf9bf3-ae5e-4b32-9e2d-4ad446d1c3b0-2f0d53a2-372c-4fda-ae5c-76c75b82d265-scratch-2026-10-28-69a692\\550eb892-041a-4a66-910b-94e27ebb110d.jsonl","cwd":"C:\\Users\\Windows01\\AppData\\Local\\Claude-Data\\claude_pzs8sxrjxfjjc\\scratch-workspaces\\1adf9bf3-ae5e-4b32-9e2d-4ad446d1c3b0\\2f0d53a2-372c-4fda-ae5c-76c75b82d265\\scratch-2026-10-28-69a692","scratchpad_dir":"C:\\Users\\WINDOW~1\\AppData\\Local\\Temp\\claude\\C--Users-Windows01-AppData-Local-Claude-Data-claude-pzs8sxrjxfjjc-scratch-workspaces-1adf9bf3-ae5e-4b32-9e2d-4ad446d1c3b0-2f0d53a2-372c-4fda-ae5c-76c75b82d265-scratch-2026-10-28-69a692\\550eb892-041a-4a66-910b-94e27ebb110d\\scratchpad","prompt_id":"1f2bcc10-d13f-451b-b624-94ac964ef446","permission_mode":"default","effort":{"level":"medium"},"hook_event_name":"PostToolUse","tool_name":"Write","tool_input":{"file_path":"C:\\Users\\Windows01\\Desktop\\Hello_world.txt","content":"The quick brown fox jumps over the lazy dog.\n"},"tool_response":{"type":"create","filePath":"C:\\Users\\Windows01\\Desktop\\Hello_world.txt","content":"The quick brown fox jumps over the lazy dog.\n","structuredPatch":[],"originalFile":null,"userModified":false},"tool_use_id":"toolu_01YQkZSb6yP3897aPtmDEv1C","duration_ms":14,"@timestamp":"2026-10-28T09:51:05.5872427Z"}
+> [!NOTE]
+>The following logs were pretty-printed from single-line JSON and trimmed to demonstrate the core information we're looking for.
+
+```json
+{
+  "session_id": "550eb892-041a-4a66-910b-94e27ebb110d",
+  "prompt_id": "1f2bcc10-d13f-451b-b624-94ac964ef446",
+  "permission_mode": "default",
+  "hook_event_name": "UserPromptSubmit",
+  "prompt": "Please create a .txt file on my Desktop called Hello_world, and type that famous sentence about the quick brown fox as its contents.",
+  "session_title": "Agentic Testbed",
+  "@timestamp": "2026-10-28T09:50:57.4881020Z"
+}
+```
+
+```json
+{
+  "session_id": "550eb892-041a-4a66-910b-94e27ebb110d",
+  "prompt_id": "1f2bcc10-d13f-451b-b624-94ac964ef446",
+  "permission_mode": "default",
+  "hook_event_name": "PreToolUse",
+  "tool_name": "Write",
+  "tool_input": {
+    "file_path": "C:\\Users\\Windows01\\Desktop\\Hello_world.txt",
+    "content": "The quick brown fox jumps over the lazy dog.\n"
+  },
+  "tool_use_id": "toolu_01YQkZSb6yP3897aPtmDEv1C",
+  "@timestamp": "2026-10-28T09:50:59.6690393Z"
+}
+```
+
+```json
+{
+  "session_id": "550eb892-041a-4a66-910b-94e27ebb110d",
+  "prompt_id": "1f2bcc10-d13f-451b-b624-94ac964ef446",
+  "permission_mode": "default",
+  "hook_event_name": "PostToolUse",
+  "tool_name": "Write",
+  "tool_input": {
+    "file_path": "C:\\Users\\Windows01\\Desktop\\Hello_world.txt",
+    "content": "The quick brown fox jumps over the lazy dog.\n"
+  },
+  "tool_response": {
+    "type": "create",
+    "filePath": "C:\\Users\\Windows01\\Desktop\\Hello_world.txt",
+    "content": "The quick brown fox jumps over the lazy dog.\n",
+    "structuredPatch": [],
+    "originalFile": null,
+    "userModified": false
+  },
+  "tool_use_id": "toolu_01YQkZSb6yP3897aPtmDEv1C",
+  "duration_ms": 14,
+  "@timestamp": "2026-10-28T09:51:05.5872427Z"
+}
 ```
