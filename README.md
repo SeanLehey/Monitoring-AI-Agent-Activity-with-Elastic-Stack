@@ -7,7 +7,9 @@ _Project in Progress_
 ## Project Overview
 As more companies provision licenses for AI tools, and as those tools become more autonomous, I believe it's prudent to learn how to closely monitor agentic activity within enterprise environments. This project is intended to demonstrate what key activity to look out for, and how to pipe this data into an analytics platform of your choice (in this case, Elastic Stack). We will be examining Sysmon activity attributed to the Claude Desktop executable, along with Claude's [hooks](https://code.claude.com/docs/en/hooks) for more granular activity information.
 
-## Resources
+## Resources Used
+* [Windows 11 Home](https://www.microsoft.com/en-us/software-download/windows11)
+* [Anthropic's Hooks Documentation](https://code.claude.com/docs/en/hooks)
 * [Elasticsearch](https://www.elastic.co/downloads/elasticsearch)
 * [Kibana](https://www.elastic.co/downloads/kibana)
 * [Filebeat](https://www.elastic.co/downloads/beats/filebeat)
@@ -17,9 +19,13 @@ As more companies provision licenses for AI tools, and as those tools become mor
 
 Ensure your Elastic Stack component versions match (I used version 9.5.5 for this project).
 
+## Enabling and Starting Sysmon
+placeholder text
+
 ## Installing ELK
 Start by downloading the four ELK components above in any order. Then install as follows:
 
+#### Elasticsearch
 Extract the contents of `elasticsearch-9.5.5-windows-x86_64` to a location of your choice - in this case, we will extract to `C:\ELK\`.
 
 <img width="1414" height="302" alt="image" src="https://github.com/user-attachments/assets/91adfd56-66aa-4adb-935d-1b88fd51440b" />
@@ -27,3 +33,10 @@ Extract the contents of `elasticsearch-9.5.5-windows-x86_64` to a location of yo
 Then open a terminal, run `cd C:\ELK\elasticsearch-9.5.5`, and type `.\bin\elasticsearch.bat`. This will provide you with a password for the `elastic` user as well as an enrollment token you'll need to save for when we launch the web application.
 
 <img width="2512" height="918" alt="image" src="https://github.com/user-attachments/assets/72de2b3a-fe74-423a-a0b4-76dec533f9ca" />
+
+#### Kibana
+Extract the contents of `kibana-9.5.5-windows-x86_64` to `C:\ELK\` just as we did for Elasticsearch.
+
+<img width="1409" height="297" alt="image" src="https://github.com/user-attachments/assets/cd14bdf2-eddc-48f2-851a-c9897ff077b6" />
+
+Open another terminal, run `cd C:\ELK\kibana-9.5.5`, and type `.\bin\kibana.bat`. 
