@@ -45,7 +45,15 @@ Open another terminal, run `cd C:\ELK\kibana-9.5.5`, and type `.\bin\kibana.bat`
 
 Open that URL in a browser of your choice, and paste the enrollment token from our Elasticsearch setup. Then, click _Configure Elastic_.
 
+Note: You will not need the access code for future sessions. Simply visit `http://localhost:5601/` and log in with your credentials from now on.
+
 <img width="1268" height="227" alt="image" src="https://github.com/user-attachments/assets/d44e6914-4063-4135-b748-5d06d512ca07" />
 
 You will then be presented with a login portal. Enter _elastic_ in the username field and paste the password we received during Elasticsearch setup.
+
+<img width="2555" height="1334" alt="image" src="https://github.com/user-attachments/assets/e09149e0-4288-4c15-8988-ac0bde2f899b" />
+
+Logging in will bring us to the home page:
+
+<img width="2557" height="1325" alt="image" src="https://github.com/user-attachments/assets/12291547-b1ec-4d13-a994-6d2ee60aabf6" />
 
