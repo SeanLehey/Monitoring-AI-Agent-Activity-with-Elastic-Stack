@@ -65,3 +65,8 @@ Place `settings.json` into `%USERPROFILE%\.claude\` and place `log-event.ps1` in
 
 Note: The `\.claude\` directory will not exist until you have Claude Code perform an agentic action, so be sure to do so in order for the folder to initialize. Ask me how I know!
 
+Now we can start tracking some hooks! I've asked Claude Code to create a simple .txt file.
+
+<img width="1375" height="491" alt="image" src="https://github.com/user-attachments/assets/4dc513c4-0081-417b-868c-612300b0cc02" />
+
+Let's see what this looks like from a security analyst's point of view. Navigate to `%USERPROFILE%\.claude\hook-logs\agent-activity.jsonl` and take a look at each log entry that begins with `{"session_id":`. As we can see, there are three distinct hooks associated with our agentic action:
