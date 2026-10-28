@@ -39,4 +39,13 @@ Extract the contents of `kibana-9.5.5-windows-x86_64` to `C:\ELK\` just as we di
 
 <img width="1409" height="297" alt="image" src="https://github.com/user-attachments/assets/cd14bdf2-eddc-48f2-851a-c9897ff077b6" />
 
-Open another terminal, run `cd C:\ELK\kibana-9.5.5`, and type `.\bin\kibana.bat`. 
+Open another terminal, run `cd C:\ELK\kibana-9.5.5`, and type `.\bin\kibana.bat`. You will be presented with a URL containing a 6-digit access code:
+
+<img width="2289" height="526" alt="image" src="https://github.com/user-attachments/assets/0ce9f03c-7b7f-4223-ab76-aad4223e5f59" />
+
+Open that URL in a browser of your choice, and paste the enrollment token from our Elasticsearch setup. Then, click _Configure Elastic_.
+
+<img width="1268" height="227" alt="image" src="https://github.com/user-attachments/assets/d44e6914-4063-4135-b748-5d06d512ca07" />
+
+You will then be presented with a login portal. Enter _elastic_ in the username field and paste the password we received during Elasticsearch setup.
+
