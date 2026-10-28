@@ -63,7 +63,8 @@ For this section, we'll be using the files `log-event.ps1` and `settings.json`.
 
 Place `settings.json` into `%USERPROFILE%\.claude\` and place `log-event.ps1` into `%USERPROFILE%\.claude\hooks\` after creating the latter subfolder.
 
-Note: The `\.claude\` directory will not exist until you have Claude Code perform an agentic action, so be sure to do so in order for the folder to initialize. Ask me how I know!
+> [!NOTE]
+> The `\.claude\` directory will not exist until you have Claude Code perform an agentic action, so be sure to do so in order for the folder to initialize. Ask me how I know!
 
 Now we can start tracking some hooks! I've asked Claude Code to create a simple .txt file.
 
@@ -126,3 +127,10 @@ Let's see what this looks like from a security analyst's point of view. Navigate
   "@timestamp": "2026-10-28T09:51:05.5872427Z"
 }
 ```
+Let's explore what these hook events mean. 
+
+`UserPromptSubmit` is what it says on the tin; it is a record of the user's prompt that initiated the agentic action.
+
+`PreToolUse`
+
+`PostToolUse`
