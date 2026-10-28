@@ -57,3 +57,11 @@ Logging in will bring us to the home page:
 
 <img width="2557" height="1325" alt="image" src="https://github.com/user-attachments/assets/12291547-b1ec-4d13-a994-6d2ee60aabf6" />
 
+## Extracting and Forwarding Claude Hooks
+
+For this section, we'll be using the files `log-event.ps1` and `settings.json`.
+
+Place `settings.json` into `%USERPROFILE%\.claude\` and place `log-event.ps1` into `%USERPROFILE%\.claude\hooks\` after creating the latter subfolder.
+
+Note: The `\.claude\` directory will not exist until you have Claude Code perform an agentic action, so be sure to do so in order for the folder to initialize. Ask me how I know!
+
