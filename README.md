@@ -20,7 +20,13 @@ As more companies provision licenses for AI tools, and as those tools become mor
 Ensure your Elastic Stack component versions match (I used version 9.5.5 for this project).
 
 ## Enabling and Starting Sysmon
-placeholder text
+On Windows 11 Home, you can enable enable Sysmon via the shortcut `Windows+R` and typing `optionalfeatures`. Here you will simply tick the checkbox to enable Sysmon.
+
+<img width="892" height="782" alt="image" src="https://github.com/user-attachments/assets/3b3b03a3-057d-4f53-8751-4956083ed5a5" />
+
+Then, in a privileged terminal, type `sysmon -i` to install and start the Sysmon service. After downloading `sysmon-claude.xml` from this repo and saving it to your ELK folder, you can apply it as a configuration file by typing `sysmon -c C:\ELK\sysmon-claude.xml`.
+
+This configuration file allows us to log activity attributed to Claude such as Git Bash usage, network connections, and child processes.
 
 ## Installing ELK
 Start by downloading the four ELK components above in any order. Then install as follows:
