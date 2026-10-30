@@ -133,10 +133,6 @@ Let's see what this looks like from a security analyst's point of view. Navigate
   "@timestamp": "2026-10-28T09:51:05.5872427Z"
 }
 ```
-Let's explore what these hook events mean. 
+Now that we've confirmed that we can read these hook events, we'll be adding some more to aid in our correlation efforts:
 
-[`UserPromptSubmit`](https://code.claude.com/docs/en/hooks#userpromptsubmit) is what it says on the tin; it shows exactly what the user typed as their prompt.
-
-[`PreToolUse`](https://code.claude.com/docs/en/hooks#pretooluse)
-
-[`PostToolUse`](https://code.claude.com/docs/en/hooks#posttooluse)
+list new hook events here god im so sleepy is anyone reading this commit? good night
