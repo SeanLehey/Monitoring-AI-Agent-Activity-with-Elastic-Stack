@@ -1,0 +1,33 @@
+<Sysmon schemaversion="4.91">
+  <HashAlgorithms>SHA256</HashAlgorithms>
+  <EventFiltering>
+    <RuleGroup name="Claude process creation" groupRelation="or">
+      <ProcessCreate onmatch="include">
+        <Image condition="contains">Claude</Image>
+        <ParentImage condition="contains">Claude</ParentImage>
+        <ParentImage condition="end with">\Git\usr\bin\bash.exe</ParentImage>
+      </ProcessCreate>
+    </RuleGroup>
+    <RuleGroup name="Electron helper noise" groupRelation="or">
+      <ProcessCreate onmatch="exclude">
+        <CommandLine condition="contains">--type=</CommandLine>
+      </ProcessCreate>
+    </RuleGroup>
+    <RuleGroup name="Claude file creation" groupRelation="or">
+      <FileCreate onmatch="include">
+        <Image condition="contains">Claude</Image>
+        <Image condition="end with">\Git\usr\bin\bash.exe</Image>
+      </FileCreate>
+    </RuleGroup>
+    <RuleGroup name="Claude network connections" groupRelation="or">
+      <NetworkConnect onmatch="include">
+        <Image condition="contains">Claude</Image>
+      </NetworkConnect>
+    </RuleGroup>
+    <RuleGroup name="Suppress default noise" groupRelation="or">
+      <ProcessTerminate onmatch="include"/>
+      <FileCreateTime onmatch="include"/>
+      <DriverLoad onmatch="include"/>
+    </RuleGroup>
+  </EventFiltering>
+</Sysmon>
