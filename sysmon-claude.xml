@@ -5,7 +5,7 @@
       <ProcessCreate onmatch="include">
         <Image condition="contains">Claude</Image>
         <ParentImage condition="contains">Claude</ParentImage>
-        <ParentImage condition="end with">\Git\usr\bin\bash.exe</ParentImage>
+        <ParentImage condition="contains">\Git\</ParentImage>
       </ProcessCreate>
     </RuleGroup>
     <RuleGroup name="Electron helper noise" groupRelation="or">
@@ -13,10 +13,10 @@
         <CommandLine condition="contains">--type=</CommandLine>
       </ProcessCreate>
     </RuleGroup>
-    <RuleGroup name="Claude file creation" groupRelation="or">
+    <RuleGroup name="Claude Code file creation" groupRelation="or">
       <FileCreate onmatch="include">
-        <Image condition="contains">Claude</Image>
-        <Image condition="end with">\Git\usr\bin\bash.exe</Image>
+        <Image condition="contains">\claude-code\</Image>
+        <Image condition="contains">\Git\</Image>
       </FileCreate>
     </RuleGroup>
     <RuleGroup name="Claude network connections" groupRelation="or">
