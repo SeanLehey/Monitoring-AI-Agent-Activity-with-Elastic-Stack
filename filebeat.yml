@@ -1,0 +1,41 @@
+filebeat.inputs:
+  - type: filestream
+    id: claude-hook-log
+    paths:
+      - 'C:\Users\Windows01\.claude\hook-logs\agent-activity.jsonl'
+    parsers:
+      - ndjson:
+          target: ""
+          overwrite_keys: true
+
+processors:
+  - rename:
+      fields:
+        - from: "error"
+          to: "tool_error"
+        - from: "source"
+          to: "session_source"
+      ignore_missing: true
+      fail_on_error: false
+  - script:
+      lang: javascript
+      source: >
+        function process(event) {
+          var fields = ["tool_response", "permission_suggestions"];
+          for (var i = 0; i < fields.length; i++) {
+            var v = event.Get(fields[i]);
+            if (v !== null && v !== undefined) {
+              event.Put(fields[i] + "_json", JSON.stringify(v));
+              event.Delete(fields[i]);
+            }
+          }
+        }
+
+setup.kibana:
+  host: "http://localhost:5601"
+
+output.elasticsearch:
+  hosts: ["https://localhost:9200"]
+  username: "elastic"
+  password: "YOUR_PASSWORD_HERE"
+  ssl.certificate_authorities: ['C:\ELK\elasticsearch-9.5.5\config\certs\http_ca.crt']
