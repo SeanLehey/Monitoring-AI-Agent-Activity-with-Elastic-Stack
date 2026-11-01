@@ -135,4 +135,6 @@ Let's see what this looks like from a security analyst's point of view. Navigate
 ```
 Now that we've confirmed that we can read these hook events, we'll be adding some more to aid in our correlation efforts:
 
-list new hook events here god im so sleepy is anyone reading this commit? good night
+## Filebeat
+
+Download the MSI file from the Filebeat link in the _Resources Used_ section. After completing installation, place `filebeat.yml` into `C:\Program Files\Elastic\Beats\9.5.5\filebeat\`. 
