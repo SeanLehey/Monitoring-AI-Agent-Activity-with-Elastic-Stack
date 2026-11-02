@@ -110,7 +110,19 @@ Each action performed by Claude is associated with a hook event whose metadata w
   "tool_input": {
     "file_path": "C:\\Users\\Windows01\\Desktop\\Hello_world.txt",
     "content": "The quick brown fox jumps over the lazy dog.\n"
-  }
+  },
+  "tool_response": {
+    "type": "create",
+    "filePath": "C:\\Users\\Windows01\\Desktop\\Hello_world.txt",
+    "content": "The quick brown fox jumps over the lazy dog.\n",
+    "structuredPatch": [],
+    "originalFile": null,
+    "userModified": false
+  },
+  "tool_use_id": "toolu_01YQkZSb6yP3897aPtmDEv1C",
+  "duration_ms": 14,
+  "@timestamp": "2026-10-28T09:51:05.5872427Z"
+}
 ```
 `PostToolUseFailure`: This hook event is logged when a tool use fails. In the following example, I asked Claude Code to perform the `ls` command in a non-existent folder, resulting in a "cannot access" explanation associated with the tool_error value.<br>
 ```json
