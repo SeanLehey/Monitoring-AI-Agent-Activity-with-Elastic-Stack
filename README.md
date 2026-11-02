@@ -112,7 +112,7 @@ Each action performed by Claude is associated with a hook event whose metadata w
     "content": "The quick brown fox jumps over the lazy dog.\n"
   }
 ```
-`PostToolUseFailure`: This hook event is logged when a tool use fails. In the following example, I asked Claude Code to perform the `ls` command in a non-existent folder, resulting in a "cannot access" tool_error value.<br>
+`PostToolUseFailure`: This hook event is logged when a tool use fails. In the following example, I asked Claude Code to perform the `ls` command in a non-existent folder, resulting in a "cannot access" explanation associated with the tool_error value.<br>
 ```json
 {
   "session_id": "550eb892-041a-4a66-910b-94e27ebb110d",
@@ -131,7 +131,7 @@ Each action performed by Claude is associated with a hook event whose metadata w
   "@timestamp": "2026-11-02T06:18:19.100Z"
 }
 ```
-`PermissionRequest` and `PermissionDenied`: PermissionRequest occurs when a tool invocation requires permission. PermisionDenied is a funny one because it is only the result of denied permissions in Auto mode. In this scenario, a safety classifier judges the riskiness of an action and results in either an approval or denial of that action.<br>
+`PermissionRequest` and `PermissionDenied`: PermissionRequest occurs when a tool invocation requires permission. In this scenario, a safety classifier judges the riskiness of an action and results in either an approval or denial of that action.<br>
 
 [_Actions that the classifier deems as safe proceed automatically, and risky ones get blocked, redirecting Claude to take a different approach. If Claude insists on taking actions that are continually blocked, it will eventually trigger a permission prompt to the user._](https://claude.com/resources/articles/auto-mode)
 
