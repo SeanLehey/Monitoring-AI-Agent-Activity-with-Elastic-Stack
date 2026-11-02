@@ -227,7 +227,7 @@ Drilling down into that field reveals the original query from our user:
 
 <img width="926" height="212" alt="image" src="https://github.com/user-attachments/assets/0032a700-a059-435e-b9b3-032d434c023a" />
 
-At this point, it's simply a matter of correlating the user's role/projects/job duties to the activity, and actioning the alert from there.
+At this point, it's simply a matter of correlating the user's role/projects/job duties to the activity, and actioning the alert with traditional investigative techniques from that point forward.
 
 ## Closing Thoughts
 
