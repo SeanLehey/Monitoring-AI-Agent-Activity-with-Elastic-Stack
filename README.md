@@ -1,5 +1,4 @@
 # Monitoring AI Agent Activity with Elastic Stack
-_Project Completed in November 2026_
 
 > [!NOTE]
 > See my [AI ethics statement](https://github.com/SeanLehey/Personal-AI-Ethics-Statement) for how I use, and don't use, AI for certain tasks.
