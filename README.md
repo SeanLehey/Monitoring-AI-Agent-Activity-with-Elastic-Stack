@@ -8,7 +8,7 @@ _Project in Progress_
 As more companies provision licenses for AI tools, and as those tools become more autonomous, I believe it's prudent to learn how to closely monitor agentic activity within enterprise environments. This project is intended to demonstrate what key activity to look out for, and how to pipe this data into an analytics platform of your choice (in this case, Elastic Stack). We will be examining Sysmon activity attributed to the Claude Desktop executable, along with Claude's hook events for more granular insight into agentic actions.
 
 ## Resources Used
-* [Windows 11 Home (25H2)](https://www.microsoft.com/en-us/software-download/windows11)
+* [Windows 11 25H2](https://www.microsoft.com/en-us/software-download/windows11)
 * [Anthropic's Hooks Documentation](https://code.claude.com/docs/en/hooks)
 * [Elasticsearch](https://www.elastic.co/downloads/elasticsearch)
 * [Kibana](https://www.elastic.co/downloads/kibana)
@@ -70,26 +70,6 @@ Logging in will bring us to the home page:
 ## Filebeat
 
 Download the MSI file from the Filebeat link in the _Resources Used_ section. After completing installation, place `filebeat.yml` into `C:\Program Files\Elastic\Beats\9.5.5\filebeat\`. 
-
-## Extracting and Forwarding Claude Hooks
-
-For this section, we'll be using the files `log-event.ps1` and `settings.json`.
-
-Place `settings.json` into `%USERPROFILE%\.claude\` and place `log-event.ps1` into `%USERPROFILE%\.claude\hooks\` after creating the latter subfolder.
-
-> [!NOTE]
-> The `\.claude\` directory will not exist until you have Claude Code perform an agentic action, so be sure to do so in order for the folder to initialize. Ask me how I know!
-
-Now we can start tracking some hooks! I've asked Claude Code to create a simple .txt file.
-
-<img width="1375" height="491" alt="image" src="https://github.com/user-attachments/assets/4dc513c4-0081-417b-868c-612300b0cc02" />
-
-Let's see what this looks like from a security analyst's point of view. Navigate to `%USERPROFILE%\.claude\hook-logs\agent-activity.jsonl` and take a look at each log entry that begins with `{"session_id":`. As we can see, there are three distinct hook events associated with our agentic action.
-
-> [!NOTE]
->The following logs were pretty-printed from single-line JSON and trimmed to demonstrate the core information we're looking for.
-
-
 
 </details>
 
@@ -233,7 +213,7 @@ Now that we've confirmed that Claude was responsible for this command, we can ga
 
 <img width="2560" height="1336" alt="image" src="https://github.com/user-attachments/assets/e65d7dd7-91c5-4a22-a9e5-0f7698c0d9da" />
 
-Comparing the timestamps between our search results shows a pretty solid match! 
+Comparing the timestamps between our search results shows a solid match! 
 
 However, these results only show the `PreToolUse` and `PostToolUse` hook events. Let's expand one of these log entries and filter for the `prompt_id` field, then perform a novel search for that value.
 
