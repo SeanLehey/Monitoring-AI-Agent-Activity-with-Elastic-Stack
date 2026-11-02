@@ -135,6 +135,15 @@ Each action performed by Claude is associated with a hook event whose metadata w
 
 [_Actions that the classifier deems as safe proceed automatically, and risky ones get blocked, redirecting Claude to take a different approach. If Claude insists on taking actions that are continually blocked, it will eventually trigger a permission prompt to the user._](https://claude.com/resources/articles/auto-mode)
 
+I tried to produce a PermissionDenied hook event, but the nature of the activity that Anthropic flags as risky or dangerous means I'd be risking my Claude account by attempting to provide you with an example. This is the inert query I entered before finding out it's probably not a good idea to do this on a SaaS model:
+
+<img width="942" height="116" alt="image" src="https://github.com/user-attachments/assets/e39f12bc-f45c-409d-8cbc-be43b1f9547d" />
+
+To be specific, the curl action I attempted did not even make it to the classifier as Claude's response appears to be part of [model-level safeguards](https://support.claude.com/en/articles/8106465-our-approach-to-user-safety). Enjoy this account notice I received instead:
+
+<img width="1064" height="750" alt="image" src="https://github.com/user-attachments/assets/2df6ea39-b642-4144-9dfe-c4016c3d71e2" />
+
+
 </details>
 
 
