@@ -97,9 +97,47 @@ Let's see what this looks like from a security analyst's point of view. Navigate
 
 Each action performed by Claude is associated with a hook event whose metadata we forward to Elastic for analysis. The following snippets have been trimmed of extraneous fields and pretty-printed for easier reading. Pay particular attention to the `hook_event_name` field. Let's take a closer look.
 
-`SessionStart` and `SessionEnd`: These hook events track the start and end of sessions, and each session is associated with a `session_id` value.<br>
-`UserPromptSubmit`: This hook event contains the text content of the user's query. <br>
-`PreToolUse` and `PostToolUse`: The PreToolUse hook fires when an agent makes the decision to use a tool. If this tool usage succeeds, the tool used and the result of that usage is logged during the PostToolUse event. These two hook events produce similar values so I'll just include an example of PostToolUse for brevity's sake:<br>
+#### `SessionStart` and `SessionEnd`
+
+These hook events track the start and end of sessions, and each session is associated with a `session_id` value.<br>
+```json
+{
+  "session_id": "8cfce91b-f771-4978-9414-c60d32c53211",
+  "hook_event_name": "SessionStart",
+  "session_source": "startup",
+  "@timestamp": "2026-11-02T07:40:08.279Z"
+}
+```
+
+```json
+{
+  "session_id": "8cfce91b-f771-4978-9414-c60d32c53211",
+  "prompt_id": "f656a7e4-4afb-494c-804a-5ef9bb649d7d",
+  "hook_event_name": "SessionEnd",
+  "reason": "other",
+  "@timestamp": "2026-11-02T07:40:47.434Z"
+}
+```
+
+The SessionEnd hook event above was the result of archiving the chat session, which falls under the "other" value. Attempting to find out what else falls under the "other" value yielded this comically unhelpful table entry from Claude's hook documentation:
+
+<img width="652" height="62" alt="image" src="https://github.com/user-attachments/assets/7ed52051-cf5b-4431-99af-2988dbc3aa44" />
+
+#### `UserPromptSubmit`
+This hook event contains the text content of the user's query. <br>
+```json
+{
+  "session_id": "550eb892-041a-4a66-910b-94e27ebb110d",
+  "prompt_id": "1f2bcc10-d13f-451b-b624-94ac964ef446",
+  "permission_mode": "default",
+  "hook_event_name": "UserPromptSubmit",
+  "prompt": "Please create a .txt file on my Desktop called Hello_world, and type that famous sentence about the quick brown fox as its contents.",
+  "session_title": "Agentic Testbed",
+  "@timestamp": "2026-10-28T09:50:57.488Z"
+}
+```
+#### `PreToolUse` and `PostToolUse`
+The PreToolUse hook fires when an agent makes the decision to use a tool. If this tool usage succeeds, the tool used and the result of that usage is logged during the PostToolUse event. These two hook events produce similar values so I'll just include an example of PostToolUse for brevity's sake:<br>
 ```json
 {
   "session_id": "550eb892-041a-4a66-910b-94e27ebb110d",
@@ -110,21 +148,10 @@ Each action performed by Claude is associated with a hook event whose metadata w
   "tool_input": {
     "file_path": "C:\\Users\\Windows01\\Desktop\\Hello_world.txt",
     "content": "The quick brown fox jumps over the lazy dog.\n"
-  },
-  "tool_response": {
-    "type": "create",
-    "filePath": "C:\\Users\\Windows01\\Desktop\\Hello_world.txt",
-    "content": "The quick brown fox jumps over the lazy dog.\n",
-    "structuredPatch": [],
-    "originalFile": null,
-    "userModified": false
-  },
-  "tool_use_id": "toolu_01YQkZSb6yP3897aPtmDEv1C",
-  "duration_ms": 14,
-  "@timestamp": "2026-10-28T09:51:05.5872427Z"
 }
 ```
-`PostToolUseFailure`: This hook event is logged when a tool use fails. In the following example, I asked Claude Code to perform the `ls` command in a non-existent folder, resulting in a "cannot access" explanation associated with the tool_error value.<br>
+#### `PostToolUseFailure`
+This hook event is logged when a tool use fails. In the following example, I asked Claude Code to perform the `ls` command in a non-existent folder, resulting in a "cannot access" explanation associated with the tool_error value.<br>
 ```json
 {
   "session_id": "550eb892-041a-4a66-910b-94e27ebb110d",
@@ -143,7 +170,8 @@ Each action performed by Claude is associated with a hook event whose metadata w
   "@timestamp": "2026-11-02T06:18:19.100Z"
 }
 ```
-`PermissionRequest` and `PermissionDenied`: PermissionRequest occurs when a tool invocation requires permission. In this scenario, a safety classifier judges the riskiness of an action and results in either an approval or denial of that action.<br>
+#### `PermissionRequest` and `PermissionDenied`
+PermissionRequest occurs when a tool invocation requires permission. In this scenario, a safety classifier judges the riskiness of an action and results in either an approval or denial of that action.<br>
 
 [_Actions that the classifier deems as safe proceed automatically, and risky ones get blocked, redirecting Claude to take a different approach. If Claude insists on taking actions that are continually blocked, it will eventually trigger a permission prompt to the user._](https://claude.com/resources/articles/auto-mode)
 
@@ -151,10 +179,11 @@ I tried to produce a PermissionDenied hook event, but the nature of the activity
 
 <img width="942" height="116" alt="image" src="https://github.com/user-attachments/assets/e39f12bc-f45c-409d-8cbc-be43b1f9547d" />
 
-To be specific, the curl action I attempted did not even make it to the classifier as Claude's response appears to be part of [model-level safeguards](https://support.claude.com/en/articles/8106465-our-approach-to-user-safety). Enjoy this account notice I received instead:
+To be specific, the curl action I attempted did not even make it to the classifier as Claude's response appears to be part of [model-level safeguards](https://support.claude.com/en/articles/8106465-our-approach-to-user-safety). Please enjoy these account notices I received while creating this project:
 
-<img width="1064" height="750" alt="image" src="https://github.com/user-attachments/assets/2df6ea39-b642-4144-9dfe-c4016c3d71e2" />
+<img width="1454" height="642" alt="image" src="https://github.com/user-attachments/assets/c15bcb03-688a-4dc0-989d-5b1a0bfd6d13" />
 
+<img width="1574" height="286" alt="image" src="https://github.com/user-attachments/assets/d13aab67-2c8b-4341-9284-75844ea72ee3" />
 
 </details>
 
