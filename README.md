@@ -19,7 +19,7 @@ As more companies provision licenses for AI tools, and as those tools become mor
 
 ## Understanding Agent Hook Events
 
-Each action performed by Claude is associated with a hook event whose metadata we forward to Elastic for analysis. The following snippets are sourced from my environment have been trimmed of extraneous fields and pretty-printed for easier reading. Pay particular attention to the `hook_event_name` field. Let's take a closer look.
+Each action performed by Claude is associated with a hook event whose metadata we forward to Elastic for analysis. The following snippets are sourced from my environment and have been trimmed of extraneous fields and pretty-printed for easier reading. Pay particular attention to the `hook_event_name` field. Let's take a closer look.
 
 #### `SessionStart` and `SessionEnd`
 
@@ -175,12 +175,8 @@ At this point, it's simply a matter of correlating the user's role/projects/job 
 
 ## Closing Thoughts
 
-This project has the potential to branch off into a million different directions, but I feel I've completed what I set out to accomplish. We set up logging and forwarding for Sysmon and our hook events, and simulated a basic investigation that utilizes and correlates this data to aid in our conclusion.
+Monitoring agent hooks will be of critical importance as more companies allow agents into their environments. Understanding how to interpret this data will be key as more enterprise tools continue to offer these capabilities. While this was certainly not an exhaustive list of hook events, I feel that I included most of the important ones that would aid in a security analyst's investigation, especially the extremely important `UserPromptSubmit` example.
 
-Monitoring agent hooks will be of critical importance as more companies allow agents into their environments. Understanding how to interact with this data will be key as more enterprise tools continue to offer these capabilities.
-
-While this was certainly not an exhaustive list of hook events, I feel that I included most of the important ones that would aid in a security analyst's investigation, especially the extremely important `UserPromptSubmit` example. A more robust reporting tool would log all of these, and would likely log chat transcripts as well, though that has some regulatory/data privacy considerations that are beyond the scope of this project.
-
-I hope you enjoyed this writeup and learned a thing or two! Feel free to check out my other projects or reach out with any questions. Thanks!
+A more robust reporting tool would log more hook events, and would likely log chat transcripts as well, though that has some regulatory/data privacy considerations that are beyond the scope of this project. I'll try to dig deeper in future projects. I hope you enjoyed this writeup and learned a thing or two! Feel free to check out my other projects or reach out with any questions.
 
 [Return to Sean's Profile](https://github.com/SeanLehey)
