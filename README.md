@@ -19,7 +19,7 @@ As more companies provision licenses for AI tools, and as those tools become mor
 
 ## Understanding Agent Hook Events
 
-Each action performed by Claude is associated with a hook event whose metadata we forward to Elastic for analysis. The following snippets have been trimmed of extraneous fields and pretty-printed for easier reading. Pay particular attention to the `hook_event_name` field. Let's take a closer look.
+Each action performed by Claude is associated with a hook event whose metadata we forward to Elastic for analysis. The following snippets are sourced from my environment have been trimmed of extraneous fields and pretty-printed for easier reading. Pay particular attention to the `hook_event_name` field. Let's take a closer look.
 
 #### `SessionStart` and `SessionEnd`
 
