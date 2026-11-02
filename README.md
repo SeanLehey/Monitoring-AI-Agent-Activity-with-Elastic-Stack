@@ -143,9 +143,9 @@ This represents the final hook event for each agent response to a user's query. 
 
 ## Creating an Audit Trail
 
-Now that we've set up log forwarding for Sysmon and Claude's hook events, what can we do now? We can correlate! If a security analyst works an alert for a suspicious Bash command, we can now track when that Bash process was created, and whether or not it was the result of a user's query to their agent.
+Now that we've gone over some important hook types, what can we do now? We can correlate! For instance, if a security analyst works an alert for a suspicious Bash command, we can now track when that Bash process was created, and whether or not it was the result of a user's query to their agent.
 
-For instance, let's pretend we're investigating some potential reconnaissance activity that was flagged as part of a broader investigation. We want to search for execution of the `whoami` command within the last 15 minutes within our Winlogbeat data view. Doing so yields the following results:
+Let's pretend we're investigating some potential reconnaissance activity that was flagged as part of a broader incident. We want to search for execution of the `whoami` command from the last 15 minutes within our Winlogbeat data view. Doing so yields the following results:
 
 <img width="2560" height="1336" alt="image" src="https://github.com/user-attachments/assets/14133dca-1ce4-4e23-9aa3-c4a58660fc11" />
 
