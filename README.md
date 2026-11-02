@@ -17,6 +17,9 @@ As more companies provision licenses for AI tools, and as those tools become mor
 * [Claude Desktop](https://claude.com/download)
 * [Sysmon](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon)
 
+## Configuration Files
+The attached configuration files are intended to serve as baseline reference tools for your environment's configuration. Be sure to replace any placeholder/redacted values if you incorporate them into your own environment. Remember to always use best security practices when working with passwords and other sensitive information.
+
 ## Understanding Agent Hook Events
 
 Each action performed by Claude is associated with a hook event whose metadata we forward to Elastic for analysis. The following snippets are sourced from my environment and have been trimmed of extraneous fields and pretty-printed for easier reading. Pay particular attention to the `hook_event_name` field. Let's take a closer look.
