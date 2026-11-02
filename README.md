@@ -203,3 +203,32 @@ Drilling down into the earliest of those four events and finding the `winlog.eve
 
 Now that we've confirmed that Claude was responsible for this command, we can gather more context by querying for our hook event data in our Filebeat data view.
 
+<img width="2560" height="1336" alt="image" src="https://github.com/user-attachments/assets/9b36ac86-b653-4780-bfd8-1ed7d7fb8b2d" />
+
+Comparing the timestamps between our search results shows a pretty solid match! 
+
+However, these results only show the `PreToolUse` and `PostToolUse` hook events. Let's expand one of these log entries and filter for the `prompt_id` field, then perform a novel search for that value.
+
+<img width="974" height="342" alt="image" src="https://github.com/user-attachments/assets/79bbc9ae-bbe4-4f0c-aaaf-e7bb79f6c924" />
+
+<img width="2560" height="1336" alt="image" src="https://github.com/user-attachments/assets/1638af97-730f-43ba-ae06-5ac5f2a5703d" />
+
+Voila! This search yields all five relevant hook events, including `UserPromptSubmit`, which will give us further insight into the origins of this command execution.
+
+Drilling down into that field reveals the original query from our user:
+
+<img width="926" height="212" alt="image" src="https://github.com/user-attachments/assets/0032a700-a059-435e-b9b3-032d434c023a" />
+
+At this point, it's simply a matter of correlating the user's role/projects/job duties to the activity, and actioning the alert from there.
+
+## Closing Thoughts
+
+This project has the potential to branch off into a million different directions, but I feel I've completed what I set out to accomplish. We set up logging and forwarding for Sysmon and our hook events, and simulated a basic investigation that utilizes and correlates this data to aid in our conclusion.
+
+Monitoring agent hooks will be of critical importance as more companies allow agents into their environments. Understanding how to interact with this data will be key as more enterprise tools continue to offer these capabilities.
+
+While this was certainly not an exhaustive list of hook events, I feel that I included most of the important ones that would aid in a security analyst's investigation, especially the extremely important `UserPromptSubmit` example. A more robust reporting tool would log all of these, and would likely log chat transcripts as well, though that has some regulatory/data privacy considerations that are beyond the scope of this project.
+
+I hope you enjoyed this writeup and learned a thing or two! Feel free to check out my other projects or reach out with any questions. Thanks!
+
+[Return to Sean's Profile](https://github.com/SeanLehey)
