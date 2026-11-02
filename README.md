@@ -175,17 +175,7 @@ PermissionRequest occurs when a tool invocation requires permission. In this sce
 
 [_Actions that the classifier deems as safe proceed automatically, and risky ones get blocked, redirecting Claude to take a different approach. If Claude insists on taking actions that are continually blocked, it will eventually trigger a permission prompt to the user._](https://claude.com/resources/articles/auto-mode)
 
-I tried to produce a PermissionDenied hook event, but the nature of the activity that Anthropic flags as risky or dangerous means I'd be risking my Claude account by attempting to provide you with an example. This is the inert query I entered before finding out it's probably not a good idea to do this on a SaaS model:
-
-<img width="942" height="116" alt="image" src="https://github.com/user-attachments/assets/e39f12bc-f45c-409d-8cbc-be43b1f9547d" />
-
-To be specific, the curl action I attempted did not even make it to the classifier as Claude's response appears to be part of [model-level safeguards](https://support.claude.com/en/articles/8106465-our-approach-to-user-safety):
-
-<img width="1454" height="642" alt="image" src="https://github.com/user-attachments/assets/c15bcb03-688a-4dc0-989d-5b1a0bfd6d13" />
-
-And this was the result of trying to ask about the `other` value associated with the `SessionEnd`hook event:
-
-<img width="1574" height="286" alt="image" src="https://github.com/user-attachments/assets/d13aab67-2c8b-4341-9284-75844ea72ee3" />
+I tried to produce a PermissionDenied hook event, but the nature of the activity that Anthropic flags as risky or dangerous means I'd be risking my Claude account by attempting to provide you with an example. Any attempts to "exfiltrate" data from my PC or otherwise produce a denial resulted in [model safety notices](https://support.claude.com/en/articles/8106465-our-approach-to-user-safety) that trigger well before the classifier would come into play.
 
 </details>
 
