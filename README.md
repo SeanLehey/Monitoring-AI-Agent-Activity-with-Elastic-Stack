@@ -89,67 +89,17 @@ Let's see what this looks like from a security analyst's point of view. Navigate
 > [!NOTE]
 >The following logs were pretty-printed from single-line JSON and trimmed to demonstrate the core information we're looking for.
 
-```json
-{
-  "session_id": "550eb892-041a-4a66-910b-94e27ebb110d",
-  "prompt_id": "1f2bcc10-d13f-451b-b624-94ac964ef446",
-  "permission_mode": "default",
-  "hook_event_name": "UserPromptSubmit",
-  "prompt": "Please create a .txt file on my Desktop called Hello_world, and type that famous sentence about the quick brown fox as its contents.",
-  "session_title": "Agentic Testbed",
-  "@timestamp": "2026-10-28T09:50:57.4881020Z"
-}
-```
 
-```json
-{
-  "session_id": "550eb892-041a-4a66-910b-94e27ebb110d",
-  "prompt_id": "1f2bcc10-d13f-451b-b624-94ac964ef446",
-  "permission_mode": "default",
-  "hook_event_name": "PreToolUse",
-  "tool_name": "Write",
-  "tool_input": {
-    "file_path": "C:\\Users\\Windows01\\Desktop\\Hello_world.txt",
-    "content": "The quick brown fox jumps over the lazy dog.\n"
-  },
-  "tool_use_id": "toolu_01YQkZSb6yP3897aPtmDEv1C",
-  "@timestamp": "2026-10-28T09:50:59.6690393Z"
-}
-```
-
-```json
-{
-  "session_id": "550eb892-041a-4a66-910b-94e27ebb110d",
-  "prompt_id": "1f2bcc10-d13f-451b-b624-94ac964ef446",
-  "permission_mode": "default",
-  "hook_event_name": "PostToolUse",
-  "tool_name": "Write",
-  "tool_input": {
-    "file_path": "C:\\Users\\Windows01\\Desktop\\Hello_world.txt",
-    "content": "The quick brown fox jumps over the lazy dog.\n"
-  },
-  "tool_response": {
-    "type": "create",
-    "filePath": "C:\\Users\\Windows01\\Desktop\\Hello_world.txt",
-    "content": "The quick brown fox jumps over the lazy dog.\n",
-    "structuredPatch": [],
-    "originalFile": null,
-    "userModified": false
-  },
-  "tool_use_id": "toolu_01YQkZSb6yP3897aPtmDEv1C",
-  "duration_ms": 14,
-  "@timestamp": "2026-10-28T09:51:05.5872427Z"
-}
-```
 
 </details>
 
 ## Understanding Agent Hook Events
 
-Each action performed by Claude is associated with a hook event whose metadata we forward to Elastic for analysis. Let's take a closer look.
+Each action performed by Claude is associated with a hook event whose metadata we forward to Elastic for analysis. The following snippets have been trimmed of extraneous fields and pretty-printed for easier reading. Pay particular attention to the `hook_event_name` field. Let's take a closer look.
 
 `SessionStart` and `SessionEnd`: These hook events track the start and end of sessions, and each session is associated with a `session_id` value.<br>
 `UserPromptSubmit`: This hook event contains the text content of the user's query. <br>
+`PreToolUse` and `PostToolUse`: The PreToolUse hook fires when an agent makes the decision to use a tool. If this tool usage succeeds, the tool used and the result of that usage is logged during the PostToolUse event. These two hook events produce similar values so I'll just include an example of PostToolUse for brevity's sake:<br>
 ```json
 {
   "session_id": "550eb892-041a-4a66-910b-94e27ebb110d",
@@ -162,9 +112,25 @@ Each action performed by Claude is associated with a hook event whose metadata w
     "content": "The quick brown fox jumps over the lazy dog.\n"
   }
 ```
-
-`PreToolUse` and `PostToolUse`: The PreToolUse hook fires when an agent makes the decision to use a tool. If this tool usage succeeds, the tool used and the result of that usage is logged during the PostToolUse event.<br>
-`PostToolUseFailure`: This hook event is logged when a tool use fails.<br>
+`PostToolUseFailure`: This hook event is logged when a tool use fails. In the following example, I asked Claude Code to perform the `ls` command in a non-existent folder, resulting in a "cannot access" tool_error value.<br>
+```json
+{
+  "session_id": "550eb892-041a-4a66-910b-94e27ebb110d",
+  "prompt_id": "a8f7e92d-aa80-4862-a835-3efa3e825782",
+  "permission_mode": "auto",
+  "hook_event_name": "PostToolUseFailure",
+  "tool_name": "Bash",
+  "tool_input": {
+    "command": "ls ~/Desktop/404foldernotfound",
+    "description": "List contents of a Desktop subfolder"
+  },
+  "tool_use_id": "toolu_017MKUY3aCfs8iNsin5WLY1R",
+  "tool_error": "Exit code 2\nls: cannot access '/c/Users/Windows01/Desktop/404foldernotfound': No such file or directory",
+  "is_interrupt": false,
+  "duration_ms": 84,
+  "@timestamp": "2026-11-02T06:18:19.100Z"
+}
+```
 `PermissionRequest` and `PermissionDenied`: PermissionRequest occurs when a tool invocation requires permission. PermisionDenied is a funny one because it is only the result of denied permissions in Auto mode. In this scenario, a safety classifier judges the riskiness of an action and results in either an approval or denial of that action.<br>
 
 [_Actions that the classifier deems as safe proceed automatically, and risky ones get blocked, redirecting Claude to take a different approach. If Claude insists on taking actions that are continually blocked, it will eventually trigger a permission prompt to the user._](https://claude.com/resources/articles/auto-mode)
