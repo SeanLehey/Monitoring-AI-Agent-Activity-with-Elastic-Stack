@@ -21,7 +21,7 @@ Ensure your Elastic Stack component versions match (I used version 9.5.5 for thi
 
 ## Setting Things Up
 <details>
-<summary>Expand to see ELK and log forwarder configuration</summary>
+<summary>Expand to see ELK and log forwarder configuration (skip if you don't want to reproduce this project in your environment).</summary>
 
 ## Enabling and Starting Sysmon
 On Windows 11 Home, you can enable enable Sysmon via the shortcut `Windows+R` and typing `optionalfeatures`. Here you will simply tick the checkbox to enable Sysmon.
