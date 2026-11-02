@@ -80,8 +80,6 @@ Place `settings.json` into `%USERPROFILE%\.claude\` and place `log-event.ps1` in
 > [!NOTE]
 > The `\.claude\` directory will not exist until you have Claude Code perform an agentic action, so be sure to do so in order for the folder to initialize. Ask me how I know!
 
-</details>
-
 Now we can start tracking some hooks! I've asked Claude Code to create a simple .txt file.
 
 <img width="1375" height="491" alt="image" src="https://github.com/user-attachments/assets/4dc513c4-0081-417b-868c-612300b0cc02" />
@@ -143,6 +141,16 @@ Let's see what this looks like from a security analyst's point of view. Navigate
   "@timestamp": "2026-10-28T09:51:05.5872427Z"
 }
 ```
+
+</details>
+
+## Understanding Agent Hook Events
+
+Each action performed by Claude is associated with a hook event whose metadata we forward to Elastic for analysis. Let's take a closer look.
+
+`SessionStart` and `SessionEnd`: These hook events track the start and end of sessions, and each session is associated with a `session_id` value.
+`UserPromptSubmit`: This hook event contains the 
+
 Now that we've confirmed that we can read these hook events, we'll be adding some more to aid in our correlation efforts:
 
 
