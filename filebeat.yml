@@ -2,7 +2,7 @@ filebeat.inputs:
   - type: filestream
     id: claude-hook-log
     paths:
-      - 'C:\Users\Windows01\.claude\hook-logs\agent-activity.jsonl'
+      - 'C:\Users\*\.claude\hook-logs\agent-activity.jsonl'
     parsers:
       - ndjson:
           target: ""
