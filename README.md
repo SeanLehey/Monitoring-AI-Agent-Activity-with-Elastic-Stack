@@ -19,6 +19,10 @@ As more companies provision licenses for AI tools, and as those tools become mor
 
 Ensure your Elastic Stack component versions match (I used version 9.5.5 for this project).
 
+## Setting Things Up
+<details>
+<summary>Expand to see ELK and log forwarder configuration</summary>
+
 ## Enabling and Starting Sysmon
 On Windows 11 Home, you can enable enable Sysmon via the shortcut `Windows+R` and typing `optionalfeatures`. Here you will simply tick the checkbox to enable Sysmon.
 
@@ -63,6 +67,10 @@ Logging in will bring us to the home page:
 
 <img width="2557" height="1325" alt="image" src="https://github.com/user-attachments/assets/12291547-b1ec-4d13-a994-6d2ee60aabf6" />
 
+## Filebeat
+
+Download the MSI file from the Filebeat link in the _Resources Used_ section. After completing installation, place `filebeat.yml` into `C:\Program Files\Elastic\Beats\9.5.5\filebeat\`. 
+
 ## Extracting and Forwarding Claude Hooks
 
 For this section, we'll be using the files `log-event.ps1` and `settings.json`.
@@ -71,6 +79,8 @@ Place `settings.json` into `%USERPROFILE%\.claude\` and place `log-event.ps1` in
 
 > [!NOTE]
 > The `\.claude\` directory will not exist until you have Claude Code perform an agentic action, so be sure to do so in order for the folder to initialize. Ask me how I know!
+
+</details>
 
 Now we can start tracking some hooks! I've asked Claude Code to create a simple .txt file.
 
@@ -135,6 +145,4 @@ Let's see what this looks like from a security analyst's point of view. Navigate
 ```
 Now that we've confirmed that we can read these hook events, we'll be adding some more to aid in our correlation efforts:
 
-## Filebeat
 
-Download the MSI file from the Filebeat link in the _Resources Used_ section. After completing installation, place `filebeat.yml` into `C:\Program Files\Elastic\Beats\9.5.5\filebeat\`. 
