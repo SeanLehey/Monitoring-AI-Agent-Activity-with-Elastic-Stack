@@ -8,7 +8,7 @@ _Project in Progress_
 As more companies provision licenses for AI tools, and as those tools become more autonomous, I believe it's prudent to learn how to closely monitor agentic activity within enterprise environments. This project is intended to demonstrate what key activity to look out for, and how to pipe this data into an analytics platform of your choice (in this case, Elastic Stack). We will be examining Sysmon activity attributed to the Claude Desktop executable, along with Claude's hook events for more granular insight into agentic actions.
 
 ## Resources Used
-* [Windows 11 Home](https://www.microsoft.com/en-us/software-download/windows11)
+* [Windows 11 Home (25H2)](https://www.microsoft.com/en-us/software-download/windows11)
 * [Anthropic's Hooks Documentation](https://code.claude.com/docs/en/hooks)
 * [Elasticsearch](https://www.elastic.co/downloads/elasticsearch)
 * [Kibana](https://www.elastic.co/downloads/kibana)
@@ -148,9 +148,33 @@ Let's see what this looks like from a security analyst's point of view. Navigate
 
 Each action performed by Claude is associated with a hook event whose metadata we forward to Elastic for analysis. Let's take a closer look.
 
-`SessionStart` and `SessionEnd`: These hook events track the start and end of sessions, and each session is associated with a `session_id` value.
-`UserPromptSubmit`: This hook event contains the 
+`SessionStart` and `SessionEnd`: These hook events track the start and end of sessions, and each session is associated with a `session_id` value.<br>
+`UserPromptSubmit`: This hook event contains the text content of the user's query. <br>
+```json
+{
+  "session_id": "550eb892-041a-4a66-910b-94e27ebb110d",
+  "prompt_id": "1f2bcc10-d13f-451b-b624-94ac964ef446",
+  "permission_mode": "default",
+  "hook_event_name": "PostToolUse",
+  "tool_name": "Write",
+  "tool_input": {
+    "file_path": "C:\\Users\\Windows01\\Desktop\\Hello_world.txt",
+    "content": "The quick brown fox jumps over the lazy dog.\n"
+  }
+```
 
-Now that we've confirmed that we can read these hook events, we'll be adding some more to aid in our correlation efforts:
+`PreToolUse` and `PostToolUse`: The PreToolUse hook fires when an agent makes the decision to use a tool. If this tool usage succeeds, the tool used and the result of that usage is logged during the PostToolUse event.<br>
+`PostToolUseFailure`: This hook event is logged when a tool use fails.<br>
+`PermissionRequest` and `PermissionDenied`: PermissionRequest occurs when a tool invocation requires permission. PermisionDenied is a funny one because it is only the result of denied permissions in Auto mode. In this scenario, a safety classifier judges the riskiness of an action and results in either an approval or denial of that action.<br>
+
+[_Actions that the classifier deems as safe proceed automatically, and risky ones get blocked, redirecting Claude to take a different approach. If Claude insists on taking actions that are continually blocked, it will eventually trigger a permission prompt to the user._](https://claude.com/resources/articles/auto-mode)
+
+</details>
+
+
+
+
+
+
 
 
