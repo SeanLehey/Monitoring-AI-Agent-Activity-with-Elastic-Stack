@@ -15,7 +15,7 @@ As more companies provision licenses for AI tools, and as those tools become mor
 * [Filebeat](https://www.elastic.co/downloads/beats/filebeat)
 * [Winlogbeat](https://www.elastic.co/downloads/beats/winlogbeat)
 * [Claude Desktop](https://claude.com/download)
-* [Sysmon](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon)
+* [Sysmon](https://learn.microsoft.com/windows/security/operating-system-security/sysmon/overview)
 
 ## Configuration Files
 The attached configuration files are intended to serve as baseline reference tools for your environment's configuration. Be sure to replace any placeholder/redacted values if you incorporate them into your own environment. Remember to always use best security practices when working with passwords and other sensitive information.
