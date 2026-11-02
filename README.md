@@ -203,7 +203,7 @@ Drilling down into the earliest of those four events and finding the `winlog.eve
 
 Now that we've confirmed that Claude was responsible for this command, we can gather more context by querying for our hook event data in our Filebeat data view.
 
-<img width="2560" height="1336" alt="image" src="https://github.com/user-attachments/assets/9b36ac86-b653-4780-bfd8-1ed7d7fb8b2d" />
+<img width="2560" height="1336" alt="image" src="https://github.com/user-attachments/assets/e65d7dd7-91c5-4a22-a9e5-0f7698c0d9da" />
 
 Comparing the timestamps between our search results shows a pretty solid match! 
 
