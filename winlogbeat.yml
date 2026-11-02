@@ -6,6 +6,6 @@ setup.kibana:
 
 output.elasticsearch:
   hosts: ["https://localhost:9200"]
-  username: "elastic"
+  username: "YOUR_USERNAME_HERE"
   password: "YOUR_PASSWORD_HERE"
   ssl.certificate_authorities: ['C:\ELK\elasticsearch-9.5.5\config\certs\http_ca.crt']
