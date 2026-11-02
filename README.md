@@ -24,7 +24,7 @@ Ensure your Elastic Stack component versions match (I used version 9.5.5 for thi
 <summary>Expand to see ELK and log forwarder configuration (skip if you don't want to reproduce this project in your environment).</summary>
 
 ## Enabling and Starting Sysmon
-On Windows 11 Home, you can enable enable Sysmon via the shortcut `Windows+R` and typing `optionalfeatures`. Here you will simply tick the checkbox to enable Sysmon.
+On Windows 11 Home, you can enable Sysmon via the shortcut `Windows+R` and typing `optionalfeatures`. Here you will simply tick the checkbox to enable Sysmon.
 
 <img width="892" height="782" alt="image" src="https://github.com/user-attachments/assets/3b3b03a3-057d-4f53-8751-4956083ed5a5" />
 
@@ -148,6 +148,12 @@ The PreToolUse hook fires when an agent makes the decision to use a tool. If thi
   "tool_input": {
     "file_path": "C:\\Users\\Windows01\\Desktop\\Hello_world.txt",
     "content": "The quick brown fox jumps over the lazy dog.\n"
+  },
+  "tool_response": {
+    "type": "create",
+    "filePath": "C:\\Users\\Windows01\\Desktop\\Hello_world.txt",
+    "content": "The quick brown fox jumps over the lazy dog.\n"
+  }
 }
 ```
 #### `PostToolUseFailure`
@@ -213,7 +219,7 @@ This represents the final hook event for each agent response to a user's query. 
 
 ## Creating an Audit Trail
 
-Now that we've set up log forwarding for Sysmon and Claude's hook events, what can we do now? We can correlate! If a security analyst works an alert for a suspicious Bash command, we can now track when that terminal process was created, and whether or not it was the result of a user's query to their agent.
+Now that we've set up log forwarding for Sysmon and Claude's hook events, what can we do now? We can correlate! If a security analyst works an alert for a suspicious Bash command, we can now track when that Bash process was created, and whether or not it was the result of a user's query to their agent.
 
 For instance, let's pretend we're investigating some potential reconnaissance activity that was flagged as part of a broader investigation. We want to search for execution of the `whoami` command within the last 15 minutes within our Winlogbeat data view. Doing so yields the following results:
 
@@ -235,7 +241,7 @@ However, these results only show the `PreToolUse` and `PostToolUse` hook events.
 
 <img width="2560" height="1336" alt="image" src="https://github.com/user-attachments/assets/1638af97-730f-43ba-ae06-5ac5f2a5703d" />
 
-Voila! This search yields all five relevant hook events, including `UserPromptSubmit`, which will give us further insight into the origins of this command execution.
+Voilà! This search yields all five relevant hook events, including `UserPromptSubmit`, which will give us further insight into the origins of this command execution.
 
 Drilling down into that field reveals the original query from our user:
 
