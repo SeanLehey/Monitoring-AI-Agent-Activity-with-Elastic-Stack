@@ -1,0 +1,11 @@
+winlogbeat.event_logs:
+  - name: Microsoft-Windows-Sysmon/Operational
+
+setup.kibana:
+  host: "http://localhost:5601"
+
+output.elasticsearch:
+  hosts: ["https://localhost:9200"]
+  username: "elastic"
+  password: "YOUR_PASSWORD_HERE"
+  ssl.certificate_authorities: ['C:\ELK\elasticsearch-9.5.5\config\certs\http_ca.crt']
