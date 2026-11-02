@@ -179,16 +179,21 @@ I tried to produce a PermissionDenied hook event, but the nature of the activity
 
 <img width="942" height="116" alt="image" src="https://github.com/user-attachments/assets/e39f12bc-f45c-409d-8cbc-be43b1f9547d" />
 
-To be specific, the curl action I attempted did not even make it to the classifier as Claude's response appears to be part of [model-level safeguards](https://support.claude.com/en/articles/8106465-our-approach-to-user-safety). Please enjoy these account notices I received while creating this project:
+To be specific, the curl action I attempted did not even make it to the classifier as Claude's response appears to be part of [model-level safeguards](https://support.claude.com/en/articles/8106465-our-approach-to-user-safety):
 
 <img width="1454" height="642" alt="image" src="https://github.com/user-attachments/assets/c15bcb03-688a-4dc0-989d-5b1a0bfd6d13" />
+
+And this was the result of trying to ask about the `other` value associated with the `SessionEnd`hook event:
 
 <img width="1574" height="286" alt="image" src="https://github.com/user-attachments/assets/d13aab67-2c8b-4341-9284-75844ea72ee3" />
 
 </details>
 
+## Creating an Audit Trail
 
+Now that we've set up log forwarding for Sysmon and Claude's hook events, what can we do now? We can correlate! If a security analyst works an alert for a suspicious Bash command, we can now track when that terminal process was created, and whether or not it was the result of a user's query to their agent.
 
+For instance, let's 
 
 
 
