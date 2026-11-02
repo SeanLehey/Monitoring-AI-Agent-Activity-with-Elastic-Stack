@@ -151,7 +151,7 @@ The PreToolUse hook fires when an agent makes the decision to use a tool. If thi
 }
 ```
 #### `PostToolUseFailure`
-This hook event is logged when a tool use fails. In the following example, I asked Claude Code to perform the `ls` command in a non-existent folder, resulting in a "cannot access" explanation associated with the tool_error value.<br>
+This hook event is logged when a tool use fails. In the following example, I asked Claude Code to perform the `ls` command in a non-existent folder, resulting in a "cannot access" explanation associated with the `tool_error` value.<br>
 ```json
 {
   "session_id": "550eb892-041a-4a66-910b-94e27ebb110d",
@@ -176,6 +176,38 @@ PermissionRequest occurs when a tool invocation requires permission. In this sce
 [_Actions that the classifier deems as safe proceed automatically, and risky ones get blocked, redirecting Claude to take a different approach. If Claude insists on taking actions that are continually blocked, it will eventually trigger a permission prompt to the user._](https://claude.com/resources/articles/auto-mode)
 
 I tried to produce a PermissionDenied hook event, but the nature of the activity that Anthropic flags as risky or dangerous means I'd be risking my Claude account by attempting to provide you with an example. Any attempts to "exfiltrate" data from my PC or otherwise produce a denial resulted in [model safety notices](https://support.claude.com/en/articles/8106465-our-approach-to-user-safety) that trigger well before the classifier would come into play.
+
+#### `CwdChanged`
+
+Cwd is short for _Current Working Directory_. This hook event fires when Claude changes directories. In this example, we can see that Claude navigated from my Desktop to a folder on my Desktop as a result of one of my requests, as indicated by `old_cwd` and `new_cwd`.
+
+```json
+{
+  "session_id": "d9cd6be6-40b7-4a3d-a9d0-50f3c0cccfba",
+  "prompt_id": "57d4520d-17c5-4958-9fee-e658eb89aa09",
+  "hook_event_name": "CwdChanged",
+  "old_cwd": "C:\\Users\\Windows01\\Desktop",
+  "new_cwd": "C:\\Users\\Windows01\\Desktop\\MainFolder",
+  "cwd": "C:\\Users\\Windows01\\Desktop\\MainFolder",
+  "@timestamp": "2026-11-02T10:14:27.863Z"
+}
+```
+
+#### `Stop`
+
+This represents the final hook event for each agent response to a user's query. Of particular note is the `last_assistant_message` field which contains the full text of the agent's response to the user, which could be used to determine how an agent interpreted a user's request.
+
+```json
+{
+  "session_id": "fc1a1ec7-6fb1-4599-8d21-1cb716b58573",
+  "prompt_id": "d09e403f-196a-4f0f-afe8-24da3bebfd8a",
+  "permission_mode": "auto",
+  "hook_event_name": "Stop",
+  "last_assistant_message": "French toast uses bread soaked in a mix of eggs, milk, a little sugar, vanilla, and cinnamon, then fried in butter.",
+  "stop_hook_active": false,
+  "@timestamp": "2026-11-02T09:44:05.573Z"
+}
+```
 
 </details>
 
